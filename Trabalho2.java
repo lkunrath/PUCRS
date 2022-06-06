@@ -1,0 +1,62 @@
+import java.util.Scanner;
+
+public class Trabalho2 {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        int seletor;
+        String txt;
+        boolean continuarLoop = true;
+
+        while (continuarLoop) {
+
+        System.out.println("Bem-vindo(a) ao tradutor da Língua do P!\n O que você deseja fazer?\n(1) Cifrar\n(2) Decifrar\n(3) Sair\n");
+
+        System.out.print("Insira a opção: ");
+        seletor = Integer.parseInt(sc.nextLine());
+
+        switch (seletor) {
+            case 1:
+                System.out.print("Insira o texto: ");
+                txt = sc.nextLine();
+
+                System.out.print("\nTexto cifrado é: ");
+                for (int i = 0; i < txt.length(); i++) {
+                    char ch = txt.charAt(i);
+
+                    if (ch == ' ') {
+                        System.out.print(" ");
+                        continue;
+                    }
+                    System.out.print("p" + ch);
+                }System.out.println("\nOperação concluída.\n");
+                break;
+            case 2:
+                System.out.print("Insira o texto: ");
+                txt = sc.nextLine();
+
+                System.out.print("\nTexto decifrado é: ");
+                for (int i = 1; i < txt.length(); i+=2) {
+
+                    if (txt.charAt(i - 1) == ' ') {
+                        i++;
+                        System.out.print(" ");
+                    }
+
+                    char ch = txt.charAt(i);
+                    System.out.print(ch);
+                }System.out.println("\nOperação concluída.\n");
+                break;
+            case 3:
+                System.out.println("\nEncerrando...\nOperação concluída.");
+                continuarLoop = false;
+                break;
+            default:
+                System.out.println("\nOpção inválida, tente novamente.");
+                break;
+        }
+        
+      }sc.close();
+    } 
+
+}
