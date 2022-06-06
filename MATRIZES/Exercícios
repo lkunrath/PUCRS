@@ -1,1 +1,71 @@
+import java.util.Scanner;
 
+public class ExercicioMatriz {
+
+    public static void imprimeMatriz(int[][] matriz) {
+        for (int i = 0; i < matriz.length; i++) {
+            // linha
+            for (int j = 0; j < matriz[i].length; j++) {
+                // coluna
+                System.out.printf("%3d ", matriz[i][j]);
+            }
+            System.out.println("");
+        }
+    }
+
+    public static int maiorValorMatriz(int[][] matriz) {
+        int maior = matriz[0][0];
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+                if (matriz[i][j] > maior)
+                    maior = matriz[i][j];
+            }
+        }
+        return maior;
+    }
+
+    public static double mediaLinha(int[][] matriz, int linha) {
+        double media = 0;
+        for (int j = 0; j < matriz[linha].length; j++) {
+            media += matriz[linha][j];
+        }
+        return media/matriz[linha].length;
+    }
+
+    public static void parImparMatriz(int[][] matriz) {
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+                if (matriz[i][j] % 2 == 0) {
+                    matriz[i][j] = 1;
+                } else {
+                    matriz[i][j] = -1;
+                }
+            }
+        }
+    }
+
+    public static int[][] multiplicaMatrizes(int[][] a, int[][] b) {
+        return null;
+    }
+
+    public static void main(String[] args) {
+        int[][] matriz = new int[2][5];
+
+        Scanner sc = new Scanner(System.in);
+
+        for (int i = 0; i < matriz.length; i++) {
+            for (int j = 0; j < matriz[i].length; j++) {
+                System.out.printf("Digite o valor da posicao [%d, %d]: ", i, j);
+                matriz[i][j] = sc.nextInt();
+            }
+        }
+
+        imprimeMatriz(matriz);
+        System.out.println("Maior valor: " + maiorValorMatriz(matriz));
+        System.out.println("Media linha 1: " + mediaLinha(matriz, 1));
+        parImparMatriz(matriz);
+        imprimeMatriz(matriz);
+
+        
+    }
+}
