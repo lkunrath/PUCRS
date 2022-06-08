@@ -3,11 +3,11 @@ import java.util.Scanner;
 public class ExercicioMatriz {
 
     public static void imprimeMatriz(int[][] matriz) {
-        for (int i = 0; i < matriz.length; i++) {
+        for (int linha = 0; linha < matriz.length; linha++) {
             // linha
-            for (int j = 0; j < matriz[i].length; j++) {
+            for (int coluna = 0; coluna < matriz[linha].length; coluna++) {
                 // coluna
-                System.out.printf("%3d ", matriz[i][j]);
+                System.out.printf("%3d ", matriz[linha][coluna]);
             }
             System.out.println("");
         }
@@ -15,10 +15,10 @@ public class ExercicioMatriz {
 
     public static int maiorValorMatriz(int[][] matriz) {
         int maior = matriz[0][0];
-        for (int i = 0; i < matriz.length; i++) {
-            for (int j = 0; j < matriz[i].length; j++) {
-                if (matriz[i][j] > maior)
-                    maior = matriz[i][j];
+        for (int linha = 0; linha < matriz.length; linha++) {
+            for (int coluna = 0; coluna < matriz[linha].length; coluna++) {
+                if (matriz[linha][coluna] > maior)
+                    maior = matriz[linha][coluna];
             }
         }
         return maior;
@@ -26,19 +26,19 @@ public class ExercicioMatriz {
 
     public static double mediaLinha(int[][] matriz, int linha) {
         double media = 0;
-        for (int j = 0; j < matriz[linha].length; j++) {
-            media += matriz[linha][j];
+        for (int coluna = 0; coluna < matriz[linha].length; coluna++) {
+            media += matriz[linha][coluna];
         }
         return media/matriz[linha].length;
     }
 
     public static void parImparMatriz(int[][] matriz) {
-        for (int i = 0; i < matriz.length; i++) {
-            for (int j = 0; j < matriz[i].length; j++) {
-                if (matriz[i][j] % 2 == 0) {
-                    matriz[i][j] = 1;
+        for (int linha = 0; linha < matriz.length; linha++) {
+            for (int coluna = 0; coluna < matriz[linha].length; coluna++) {
+                if (matriz[linha][coluna] % 2 == 0) {
+                    matriz[linha][coluna] = 1;
                 } else {
-                    matriz[i][j] = -1;
+                    matriz[linha][coluna] = -1;
                 }
             }
         }
@@ -49,11 +49,10 @@ public class ExercicioMatriz {
     }
 
     public static boolean verificaIgualdade(int[][] a, int[][] b){
-        for (int i = 0; i < a.length; i++) {
-            for (int j = 0; j < b[i].length; j++) {
-                if (a[i][j] != b[i][j]) {
+        for (int linha = 0; linha < a.length; linha++) {
+            for (int coluna = 0; coluna < b[linha].length; coluna++) {
+                if (a[linha][coluna] != b[linha][coluna]) {
                     return false;
-                
                 }
             }
         }
@@ -61,11 +60,35 @@ public class ExercicioMatriz {
     }
 
     public static int[][] somaMatriz(int[][] a, int[][] b){
-        for(int i = 0; i < a.length; i++){
-            for(int j = 0; j < b[i].length; j++){
-                int[][] soma = new int[][];
-                soma = a[i][j] + b[i][j];
-                return soma;
+        for(int linha = 0; linha < a.length; linha++){
+            for(int coluna = 0; coluna < b[linha].length; coluna++){
+            }
+        }
+        int[][] c;
+
+            if (a[linha] == b[linha] && a[coluna] == b[coluna]) {
+            for (int linha = 0; linha < b.length; linha++) {
+                for (int coluna = 0; coluna < matrizb.length; coluna++) {
+
+                    c[linha][coluna] = a[linha][coluna] + b[linha][coluna];
+                }
+            }
+        }
+    }
+
+    public static int[][] subtraiMatriz(int[][] a, int[][] b){
+        for(int linha = 0; linha < a.length; linha++){
+            for(int coluna = 0; coluna < b[linha].length; coluna++){
+            }
+        }
+        int[][] c;
+
+            if (a[linha] == b[linha] && a[coluna] == b[coluna]) {
+            for (int linha = 0; linha < b.length; linha++) {
+                for (int coluna = 0; coluna < matrizb.length; coluna++) {
+
+                    c[linha][coluna] = a[linha][coluna] - b[linha][coluna];
+                }
             }
         }
     }
@@ -95,7 +118,9 @@ public class ExercicioMatriz {
         //System.out.println("Media linha 1: " + mediaLinha(matriz, 1));
         //parImparMatriz(matriz);
         //imprimeMatriz(matriz);
-        System.out.print(verificaIgualdade (matriz, matriz2));
-        System.out.println(somaMatriz(matriz, matriz2));
+        //System.out.print(verificaIgualdade (matriz, matriz2));
+        //System.out.println(somaMatriz(matriz, matriz2));
+        System.out.print(somaMatriz(matriz, matriz2));
+        System.out.print(subtraiMatriz(matriz, matriz2));
     }
 }
