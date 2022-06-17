@@ -13,10 +13,16 @@ public class Eleição{
 
         boolean votaçãoAberta = true;
         do{ 
-            System.out.print("Em qual opção você irá votar? ");
-            System.out.println("1 - canditato 1 \n2 - canditato 2 \n3 - candidato 3 \n4 - voto em branco \n5 - voto nulo");
+
+            System.out.println("""
+                \nEm qual opção você irá votar? 
+                1 - canditato 1 
+                2 - canditato 2 
+                3 - candidato 3 
+                4 - voto em branco 
+                5 - voto nulo
+            """);
             System.out.print("Opção escolhida: ");
-            
             int opção = sc.nextInt();
     
             if(opção == 1){
@@ -42,19 +48,20 @@ public class Eleição{
             if(opção == -1){
                 votaçãoAberta = false;
                 System.out.println("Votação encerrada com sucesso!");
+            }if(opção < -1  || opção > 5){
+                System.out.println("ERRO: O valor inserido é inválido");
             }
                         
         }while (votaçãoAberta);
+
+        float total =cont1 + cont2 + cont3 + cont4 + cont5;
+        float porcentagem = (cont4+cont5)/ total *100;
 
         System.out.println("Canditato 1 possui "+ cont1 + " votos.");
         System.out.println("Canditato 2 possui "+ cont2 + " votos.");
         System.out.println("Canditato 3 possui "+ cont3 + " votos.");
         System.out.println("A votação possui "+ cont4 + " votos brancos.");
         System.out.println("A votação possui "+ cont5 + " votos nulos.");
-
-        float total =cont1 + cont2 + cont3 + cont4 + cont5;
-        float porcentagem = (cont4+cont5)/ total *100;
-        System.out.print(porcentagem);  
-
+        System.out.println("Foram computados "+total+ " votos ao total, com "+porcentagem+"% deles sendo brancos ou nulos.");
     }   
 }
