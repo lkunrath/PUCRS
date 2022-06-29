@@ -3,10 +3,7 @@ import java.util.Scanner;
 public class DinossauroMain {
     static CadastroDinossauro cadDino = new CadastroDinossauro();
     public static void main(String[] args) {
-        Dinossauro[] lista = new Dinossauro[100];
 
-        lista[0] = new Dinossauro(001, "Triceratops", 2, 2, 8000.0, 28.0);
-        
         boolean sessaoRodando = true;
         do{
             System.out.print("""
@@ -25,113 +22,118 @@ public class DinossauroMain {
                 10 - Encerrar a sessão.
                     """ );
             System.out.print("\nO que você deseja fazer? ");
-            
+
             Scanner sc = new Scanner (System.in);
             int opção = sc.nextInt();
-            
+
             switch(opção){
                 case 1:
                     adicionarDino();
+                    break;
                 case 2:
                     verDinossauros();
+                    break;
                 case 3:
                     verUmDino();
+                    break;
                 case 4:
                     removerUmDino();
+                    break;
                 case 5:
                     relatorioTipoECategoria();
+                    break;
                 case 6:
                     relatorioMaisPesados();
+                    break;
                 case 7:
                     RelatorioKgDeCarne();
+                    break;
                 case 8:
                     RelatorioDeFuga();
+                    break;
                 case 9:
                     relatorioMaisVelozes();
+                    break;
                 case 10:
                     sessaoRodando = false;
                     System.out.println("Sessão encerrada com sucesso!");
+                    break;
                 default:
                     System.out.println("ERRO: Valor inválido");
             }
-        }while(sessaoRodando);   
+        }while(sessaoRodando);
     }
     private static void adicionarDino(){
         Dinossauro dinoAdicionado;
 
-        do{ 
+        do{
             System.out.println("\n********** CADASTRO DE DINOSSAURO **********\n");
             Scanner sc = new Scanner(System.in);
-            
+
             System.out.print("Nome/Raça do dinossauro: ");
-                String nomeRaca = sc.nextLine();
-                
-                if(nomeRaca == null){ 
-                    System.out.println("ERRO: Nome/Raça inválido!");
-                    return;
-                }
-            
+            String nomeRaca = sc.nextLine();
+
+            if(nomeRaca == null){
+                System.out.println("ERRO: Nome/Raça inválido!");
+                return;
+            }
+
             System.out.print("ID: ");
-                int id = sc.nextInt();
-                if(id < 0){
-                    System.out.println("ERRO: ID inválido!");
-                    return;
-                } 
+            int id = sc.nextInt();
+            if(id < 0){
+                System.out.println("ERRO: ID inválido!");
+                return;
+            }
 
             System.out.print("Tipo((1) - Carnívoro. (2) - Herbívoro): ");
-                int tipo = sc.nextInt();
-                if(tipo < 1 && tipo > 2){ 
-                    System.out.println("ERRO: Valor inválido!");
-                    return;
-                }
+            int tipo = sc.nextInt();
+            if(tipo < 1 && tipo > 2){
+                System.out.println("ERRO: Valor inválido!");
+                return;
+            }
 
             System.out.print("Categoria((1) - Porte Pequeno. (2) - Porte Médio. (3) - Porte Grande.): ");
-                int categoria = sc.nextInt();
-                if(categoria < 1 && categoria > 3){ 
-                    System.out.println("ERRO: Valor inválido!");
-                    return;
-                } 
+            int categoria = sc.nextInt();
+            if(categoria < 1 && categoria > 3){
+                System.out.println("ERRO: Valor inválido!");
+                return;
+            }
 
             System.out.print("Peso kg: ");
-                double peso = sc.nextDouble();
-                if(peso < 0){
-                    System.out.println("ERRO: Valor inválido!");
-                    return;
-                }
+            double peso = sc.nextDouble();
+            if(peso < 0){
+                System.out.println("ERRO: Valor inválido!");
+                return;
+            }
 
             System.out.print("Velocidade km/h: ");
-                double velocidade = sc.nextDouble();
-                if(velocidade < 0){
-                    System.out.println("ERRO: Valor inválido!");
-                    return;
-                }
+            double velocidade = sc.nextDouble();
+            if(velocidade < 0){
+                System.out.println("ERRO: Valor inválido!");
+                return;
+            }
             dinoAdicionado = new Dinossauro(id, nomeRaca, tipo, categoria, peso, velocidade);
             System.out.println("Dinossauro cadastrado com sucesso!");
             break;
         }while(true);
 
-        System.out.println(cadDino.adicionarDinossauro(dinoAdicionado));   
-        
+        System.out.println(cadDino.adicionarDinossauro(dinoAdicionado));
+
     }
-    
+
     private static void verDinossauros() {
-        Scanner sc = new Scanner(System.in);
-        int id;
-      
-        do {
             System.out.println("\n ********** LISTA DE DINOSSAUROS ********** ");
-            System.out.print(cadDino.exibirDinossauros());   
-        }while(true);
+            System.out.print(cadDino.exibirDinossauros());
     }
 
     private static void verUmDino(){
         Scanner sc = new Scanner(System.in);
         int id;
-        
+
         do {
             System.out.println("\n ********** PESQUISAR DINOSSAURO ********** ");
             System.out.print("\nInsira o ID do dinossauro que você deseja ver: ");
-            
+
             id = Integer.parseInt(sc.nextLine());
 
             if(id < 0)
@@ -141,23 +143,23 @@ public class DinossauroMain {
             break;
 
         }while(true);
-    } 
+    }
 
-    
+
     private static void removerUmDino() {
         Scanner sc = new Scanner(System.in);
         int id;
-        
+
         do {
             System.out.println("\n ********** REMOVER DINOSSAURO ********** ");
             System.out.print("Insira o ID do dinossauro que será removido: ");
-            
+
             id = Integer.parseInt(sc.nextLine());
 
             if(id < 0)
-            System.out.println("\nID inválido.");
+                System.out.println("\nID inválido.");
 
-            
+
             System.out.println("\n" + cadDino.removerDino(id));
             break;
         }while(true);
@@ -178,15 +180,15 @@ public class DinossauroMain {
 
         do {
             System.out.print("\nSelecione o tipo do dinossauro ((1) - Carnivoro. (2) - Herbivoro.): ");
-                tipo = sc.nextInt();
-                
-                if (tipo != 1 && tipo != 2) 
-                    System.out.println("\nTipo invalido.");
-                
+            tipo = sc.nextInt();
+
+            if (tipo != 1 && tipo != 2)
+                System.out.println("\nTipo invalido.");
+
 
             System.out.print("\nSelecione a categoria do dinossauro (1) - Pequeno Porte (2) - Médio Porte. (3) - Grande Porte): ");
-                categoria = sc.nextInt();
-                
+            categoria = sc.nextInt();
+
             if (categoria != 1 && categoria != 2 && categoria != 3)
                 System.out.println("\nCategoria invalida.");
             break;
@@ -208,19 +210,19 @@ public class DinossauroMain {
 
         do {
             System.out.println("\n ********** DA TEMPO DE FUGIR? ********** ");
-            
+
             System.out.print("Insira o ID do dinossauro: ");
             id = sc.nextInt();
-            
-            if(id < 0){ 
+
+            if(id < 0){
                 System.out.println("\nID inválido.");
                 continue;
             }
-    
+
             System.out.print("Insira a distância que o dinossauro está do banker (km): ");
             distanciaDinoBunker = Double.parseDouble(sc.nextLine());
-            
-            if(distanciaDinoBunker < 0){ 
+
+            if(distanciaDinoBunker < 0){
                 System.out.println("\nDistância inválida.");
                 continue;
             }
@@ -228,7 +230,7 @@ public class DinossauroMain {
             System.out.print("Insira a distância que a pessoa está do banker (km): ");
             distanciaPessBunker = Double.parseDouble(sc.nextLine());
 
-            if(distanciaPessBunker < 0){ 
+            if(distanciaPessBunker < 0){
                 System.out.println("\nDistância inválida.");
                 continue;
             }
@@ -242,12 +244,11 @@ public class DinossauroMain {
         System.out.println("\n ********** TOP 10 MAIS VELOZES ********** \n");
         int count = 0;
         for (Dinossauro d : cadDino.relatorioMaisRapidos()) {
-            if (d == null) 
-            break;
+            if (d == null)
+                break;
             count = 1;
             System.out.println(d);
         }
         if (count == 0) System.out.println("Nenhum dinossauro encontrado.");
     }
 }
-    
