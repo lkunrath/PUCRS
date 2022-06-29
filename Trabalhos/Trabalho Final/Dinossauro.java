@@ -6,14 +6,14 @@ public class Dinossauro{
     double velocidade;
     String nomeRaça;
 
-    public Dinossauro(String nomeRaça, int id, int categoria, int tipo, double kg, double velocidade){
+    public Dinossauro(int id, String nomeRaça, int categoria, int tipo, double kg, double velocidade){
         this.nomeRaça = nomeRaça;
         this.id = id;
         this.categoria = categoria;
         this.tipo = tipo;
         this.kg = kg;
         this.velocidade = velocidade;
-    
+
     }
 
     public int getId() {
@@ -69,5 +69,5 @@ public class Dinossauro{
         return "Dinossauro [categoria=" + categoria + ", id=" + id + ", kg=" + kg + ", nomeRaça=" + nomeRaça + ", tipo="
                 + tipo + ", velocidade=" + velocidade + "]";
     }
-    
+
 }
