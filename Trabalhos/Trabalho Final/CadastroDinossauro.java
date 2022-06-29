@@ -2,26 +2,80 @@ import java.util.Scanner;
 
 public class CadastroDinossauro {
     
-    
-    Dinossauro[] dinossauros = new Dinossauro[100];
-    int dinosCriados = 0;
+    static Dinossauro[] lista = new Dinossauro[100];
+    int dinosCadastrados = 1;
 
-    public boolean adicionarDinossauro(Dinossauro dino) {
-        int pos = -1;
-        for (int i = 0; i < dinossauros.length; i++)
-            if (dinossauros[i] == null) {
-                pos = i;
-                break;
-            }
-        if (pos != -1) {
-            dinossauros[pos] = dino;
-            dinosCriados++;
-            return true;
-        }
-        return false;
+    private int posicaoAtual = 0;
+    private int idAtual = 0;
+
+    public int getPosicaoAtual() {
+        return posicaoAtual;
     }
+
+    public int getIdAtual() {
+        return idAtual++;
+    }
+
+    public boolean cheio() {
+        return posicaoAtual >= lista.length;
+    }
+
+    public boolean adicionarDinossauro(Dinossauro dinossauro) {
+        if (cheio()) {
+            idAtual--;
+            return false;
+        }
+
+        lista[posicaoAtual++] = dinossauro;
+        return true;
+
+     System.out.println("\n********** CADASTRO DE DINOSSAURO **********\n");
+        Scanner sc = new Scanner(System.in);
+        int countCarnivoroPortePqno = 0; int countCarnivoroPorteMde = 0; int countCarnivoroPorteGrde = 0;
+        int cuntHerbivoroPortePqno = 0; int countHerbivoroPorteMde = 0; int countHerbivoroPorteGrde = 0;
+
+        System.out.print("Nome/Raça do dinossauro: ");
+            String nomeRaça = sc.nextLine();
+            if(nomeRaça == null){ 
+                System.out.println("ERRO: Nome/Raça inválido!");
+                return;
+            }
+        
+        System.out.print("ID: ");
+            String id = sc.nextLine();
+            if(id.length() < 0){
+                System.out.println("ERRO: ID inválido!");
+                return;
+            }
+
+        int tipo; int categoria; double peso; double velocidade; 
+
+        System.out.print("Tipo((1) - Carnívoro. (2) - Herbívoro): ");
+            tipo = sc.nextInt();
+            if(tipo < 1 && tipo > 2){ 
+                System.out.println("ERRO: Valor inválido!");
+                return;
+            }
+
+        System.out.print("Categoria((1) - Porte Pequeno. (2) - Porte Médio. (3) - Porte Grande.): ");
+            categoria = sc.nextInt();
+            if(categoria < 1 && categoria > 3){ 
+                System.out.println("ERRO: Valor inválido!");
+                return;
+            }
+            if() countPortePqno = countPortePqno + 1;
+            if(tipo == 2) countPorteMde = countPorteMde + 1;
+            if(tipo == 3) countPorteGrde = countPorteGrde + 1;
+        
+        lista[index] = new Dinossauro(id, nomeRaca, tipo, peso, velocidade);
+        System.out.println("Dinossauro cadastrado com sucesso!");
+    }
+       
+    }
+    
+
     public Dinossauro pesquisarDinossauro(int id) {
-        for (Dinossauro d : dinossauros) {
+        for (Dinossauro d : lista) {
             if (d == null) break;
             if (d.getId() == id) return d;
         }
@@ -29,54 +83,29 @@ public class CadastroDinossauro {
     }
     public boolean removerDinossauro(int id) {
         int index = -1;
-        for (int i = 0; i < dinossauros.length; i++) {
-            if (dinossauros[i] == null) break;
-            if (dinossauros[i].getId() == id) index = i;
+        for (int i = 0; i < lista.length; i++) {
+            if (lista[i] == null) break;
+            if (lista[i].getId() == id) index = i;
         }
         if (index != -1) {
-            dinossauros[index] = null;
+            lista[index] = null;
 
-            for (int i = index; i < dinossauros.length - 1; i++) {
-                dinossauros[i] = dinossauros[i + 1];
+            for (int i = index; i < lista.length - 1; i++) {
+                lista[i] = lista[i + 1];
             }
         }
         return index != -1;
     }
-    public boolean exibirDinossauros() {
-        boolean achou = false;
-        for (Dinossauro d : dinossauros) {
-            if (d !=  null) {
-                System.out.println(d);
-                achou = true;
-            }
-        }
-        return achou;
-    }
 
-    //          MÉTODOS PARA GERAR RELATÓRIOS
+    // public static void relatorioTiposECategorias(){
+    //     System.out.printf("Pequeno Porte e Carnívoro: ",)
+    // }
 
-    public String relatorioPorTipoECategoria() {
-        int carPP = 0, carMP = 0, carGP = 0;
-        int herPP = 0, herMP = 0, herGP = 0;
 
-        for (Dinossauro d : dinossauros) {
-            if (d == null) break;
-            if (d.getTipo() == 1) {
-                if (d.getCategoria() == 1) carPP++;
-                else if (d.getCategoria() == 2) carMP++;
-                else carGP++;
-            } else {
-                if (d.getCategoria() == 1) herPP++;
-                else if (d.getCategoria() == 2) herMP++;
-                else herGP++;
-            }
-        }
-        return "Carnivoros: PP: " + carPP + ", MP: " + carMP + ", GP: " + carGP + ".\nHerbivoros: PP: " + herPP + ", MP: " + herMP + ", GP: " + herGP + ".";
-    }
     public Dinossauro relatorioPesoPesado(int tipo, int categoria) {
         Dinossauro maisPesado = null;
 
-        for (Dinossauro d : dinossauros) {
+        for (Dinossauro d : lista) {
             if (d == null) break;
             if (d.getTipo() == tipo && d.getCategoria() == categoria) {
                 maisPesado = d;
@@ -84,7 +113,7 @@ public class CadastroDinossauro {
             }
         }
 
-        for (Dinossauro d : dinossauros) {
+        for (Dinossauro d : lista) {
             if (d == null || maisPesado == null) break;
 
             if (d.getTipo() == tipo && d.getCategoria() == categoria && d.getPeso() > maisPesado.getPeso()) {
@@ -93,10 +122,10 @@ public class CadastroDinossauro {
         }
         return maisPesado;
     }
-    public double relatorioQntCarneCarnivoros() {
+    public double relatorioQuantidadeCarne() {
         float valor = 0;
 
-        for (Dinossauro d : dinossauros) {
+        for (Dinossauro d : lista) {
             if (d == null) break;
             if (d.getTipo() == 1) {
                 if (d.getCategoria() == 1) valor += (d.getPeso() * 0.1f);
@@ -106,10 +135,10 @@ public class CadastroDinossauro {
         }
         return valor * 30;
     }
-    public boolean relatorioPossivelFuga(int idDino, double distanciaDinoBunker, double distanciaPessoaBunker) {
+    public boolean relatorioFuga(int idDino, double distanciaDinoBunker, double distanciaPessoaBunker) {
         Dinossauro dino = null;
 
-        for (Dinossauro d : dinossauros) {
+        for (Dinossauro d : lista) {
             if (d == null) break;
             if (d.getId() == idDino) {
                 dino = d;
@@ -126,12 +155,12 @@ public class CadastroDinossauro {
         }
         return false;
     }
-    public Dinossauro[] relatorioMaioresVelocidades() {
+    public Dinossauro[] relatorioMaisRapidos() {
         Dinossauro[] vetorDinos = new Dinossauro[100];
 
         for (int i = 0; i < 10; i++) {
-            if (dinossauros[i] == null) break;
-            vetorDinos[i] = dinossauros[i];
+            if (lista[i] == null) break;
+            vetorDinos[i] = lista[i];
         }
         return bubbleSort(vetorDinos);
     }
@@ -153,33 +182,38 @@ public class CadastroDinossauro {
         return arr;
     }
     public int tamanhoVetorNaoNulo() {
-        int count = dinosCriados;
-        for (Dinossauro d : dinossauros) {
+        int count = dinosCadastrados;
+        for (Dinossauro d : lista) {
             if (d == null) break;
         }
         return count;
     }
-    public static void main(String args[]) {
+    public static void Main(String args[]) {
+
+        lista[0] = new Dinossauro(001, "Triceratops", 2, 2, 8000.0, 28.0);
+        
         boolean sessaoRodando = true;
         do{
             System.out.println("""
-                \n**************** BEM VINDO AO CONTROLE DE FUNCIONÁRIOS ****************
+                \n**************** BEM VINDO AO JURASSIC ZOO ****************
                 MENU DE OPÇÕES
 
-                1 - Cadastre um novo funcionário.
-                2 - Remover um funcionário.
-                3 - Editar um salário.
-                4 - Ver funcionários cadastrados.
-                5 - Ver funcionário com maior salário
-                6 - Percentual de funcionários com filhos.
-                7 - Encerrar sessão.
+                1 - Cadastrar um novo dinossauro.
+                2 - Pesquisar um dinossauro.
+                3 - Remover um dinossauro.
+                4 - Ver relatório “Quantidade de animais de cada tipo e categoria”.
+                5 - Ver relatório “Peso pesado”.
+                6 - Ver relatório “Quantidade de carne para carnívoros”.
+                7 - Ver relatório “Dá tempo de fugir?”.
+                8 - Ver relatório “Dá tempo de fugir?”
+                9 - Encerrar a sessão.
                 O que você deseja fazer?
                     """);
             
             Scanner sc = new Scanner (System.in);
             int opção = sc.nextInt();
             
-            if(opção < 1 || opção > 7){
+            if(opção < 1 || opção > 9){
                 System.out.println("Opção inválida!");
             }
 
@@ -208,9 +242,17 @@ public class CadastroDinossauro {
             }
 
             if(opção == 7){
+                
+            }
+
+            if(opção == 8){
+                
+            }
+
+            if(opção == 9){
                 sessaoRodando = false;
                 System.out.println("Sessão encerrada!");
             }
         }while(sessaoRodando);   
-}
+    }
 }
