@@ -8,3 +8,9 @@ public class ex1cr {
         }
     }    
 }
+/*Outro modo de fazer:
+int cont = 0;
+while(cont < 20){
+    System.out.println("Eu amo estudar algoritmos!);
+    cont++
+}
